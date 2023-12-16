@@ -18,10 +18,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -37,16 +35,11 @@ public class validateUser {
     String serverAddress = PropertyReader.propertyReader("config.properties", "server");
     String endpoint=JsonReader.getTestData("endpoint");
     String URL = serverAddress + endpoint;
-
-
-
-
     /**
      * API to get the users list ,and validate response
      */
     @Test
     public void getUserData() {
-
         Response response =
                 given().
                 when().get(URL).
@@ -167,10 +160,7 @@ public class validateUser {
 
         // Assert that the response contains 6 users
         response.then().body("data", hasSize(5));
-
         // Assert that the first user in the list has the correct values
-
-
         response.then().body("data[1].id", is(2));
         response.then().body("data[1].email", is("Jayne_Kuhic@sydney.com"));
 
@@ -325,10 +315,6 @@ public class validateUser {
         SoftAssertionUtil.assertTrue(true, "");
         SoftAssertionUtil.assertAll();
     }
-
-
-
-
     @DataProvider(name = "testdata")
     public Object[][] testData() {
         return new Object[][]{
@@ -354,7 +340,5 @@ public class validateUser {
                 .then()
                 .statusCode(200);
     }
-
-
 }
 

@@ -11,12 +11,10 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import static io.restassured.RestAssured.given;
 
 /**
@@ -27,10 +25,7 @@ import static io.restassured.RestAssured.given;
 @Listeners(TestListeners.class)
 
 public final class postUsers {
-
     private static FileInputStream fileInputStream;
-
-
 
     /**
      * Method to return the given json file
@@ -63,7 +58,7 @@ public final class postUsers {
                 .body("{\"name\":\"pallavi\",\"job\":\"QA\"}")
                 .when()
                 .post("https://reqres.in/api/users");
-        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code,"");
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code, "");
         log.info("validatePostWithString executed successfully");
         log.info(response.getBody().asString());
     }
@@ -82,7 +77,7 @@ public final class postUsers {
                 .body("{\"name\":\"pallavisawale\",\"job\":\"SDET\"}")
                 .when()
                 .put("https://reqres.in/api/users/2");
-        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code,"");
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code, "");
         log.info("validatePutWithString executed successfully");
         log.info(response.getBody().asString());
     }
@@ -101,7 +96,7 @@ public final class postUsers {
                 .body("{\"name\":\"SawalePallavi\"}")
                 .when()
                 .patch("https://reqres.in/api/users/2");
-        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code,"");
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code, "");
         log.info("validatePatchWithString executed successfully");
         log.info(response.getBody().asString());
     }
@@ -121,7 +116,7 @@ public final class postUsers {
                 .when()
                 .post("https://reqres.in/api/users");
 
-        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code,"");
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code, "");
         log.info("validatePostWithJsonFile executed successfully");
         log.info(response.getBody().asString());
     }
@@ -139,8 +134,8 @@ public final class postUsers {
                 .header("Content-Type", "application/json")
                 .body(IOUtils.toString(fileInputStreamMethod("patchRequestBody.json")))
                 .when()
-                .patch("https://reqres.in/api/users"+"/2");
-        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code,"");
+                .patch("https://reqres.in/api/users" + "/2");
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code, "");
         log.info("validatePatchWithJsonFile executed successfully");
         log.info(response.getBody().asString());
     }
@@ -158,8 +153,8 @@ public final class postUsers {
                 .header("Content-Type", "application/json")
                 .body(IOUtils.toString(fileInputStreamMethod("putRequestBody.json")))
                 .when()
-                .put("https://reqres.in/api/users"+"/2");
-        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code,"");
+                .put("https://reqres.in/api/users" + "/2");
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code, "");
         log.info("validatePutWithJsonFile executed successfully");
         log.info(response.getBody().asString());
     }
