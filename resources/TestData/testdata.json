@@ -1,0 +1,27 @@
+{
+  "username": "postman",
+  "password": "password",
+  "endpoint": "users?page=2",
+  "languages": [
+    "Java",
+    "Javascript",
+    "Python"
+  ],
+  "getUsers": [
+    "AI",
+    "ML",
+    "Analytics"
+  ],
+  "getErgst": [
+    1,
+    2,
+    3
+  ],
+  "getPostmanEcho": [
+    "e-mail: pallavisawale11@gmail.com",
+    "phone: 8888888888",
+    "city: pune",
+    "Area: Balewadi",
+    "State: MH"
+  ]
+}
