@@ -27,9 +27,9 @@ public class AssertHelper {
             Assert.assertEquals(expected, actual);
             log.info("assert equals success expected : {}, found: {}", expected, actual);
         } catch (AssertionError error) {
-            String errorMsg = String.format("assert true failure expected: %s, actual: %s",
+            String errorMsg = String.format("assert equals failure expected: %s, actual: %s",
                     expected, actual);
-            log.error("assert true failure: {}", message);
+            log.error("assert equals failure: {}", message);
             Assert.fail(errorMsg);
         }
     }
@@ -41,6 +41,17 @@ public class AssertHelper {
         } catch (AssertionError error) {
             String errorMsg = "assert false failure";
             log.error("assert false failure: {}", message);
+            Assert.fail(errorMsg);
+        }
+    }
+
+    public void assertNotEquals(Object expected, Object actual, String message) {
+        try {
+            Assert.assertNotEquals(actual, expected, message);
+        } catch (AssertionError e) {
+            String errorMsg = String.format("assert NotEquals failure expected: %s, actual: %s",
+                    expected, actual);
+            log.error("assert NotEquals failure: {}", message);
             Assert.fail(errorMsg);
         }
     }

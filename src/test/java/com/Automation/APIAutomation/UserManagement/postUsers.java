@@ -139,7 +139,6 @@ public final class postUsers {
         log.info("validatePatchWithJsonFile executed successfully");
         log.info(response.getBody().asString());
     }
-
     /**
      * API to validate PUT request using JSON in body part
      */

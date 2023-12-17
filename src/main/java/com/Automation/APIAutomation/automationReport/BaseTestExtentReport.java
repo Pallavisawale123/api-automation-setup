@@ -23,7 +23,6 @@ public class BaseTestExtentReport {
     }
 
     @AfterMethod(alwaysRun = true)
-
     public void getResult(ITestResult result) {
 
         if (result.getStatus() == ITestResult.SUCCESS) {

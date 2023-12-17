@@ -67,7 +67,6 @@ public class validateUser {
                 .body(not(isEmptyString()));
 
     }
-
     /**
      * validate API using HasItems
      */
