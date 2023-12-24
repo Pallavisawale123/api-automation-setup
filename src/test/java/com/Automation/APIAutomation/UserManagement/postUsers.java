@@ -34,10 +34,14 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest(classes = ApiAutomationApplication.class)
 @Slf4j
 @Listeners(TestListeners.class)
-
 public final class postUsers extends BaseTestExtentReport {
     private static FileInputStream fileInputStream;
-    String serverAddress = PropertyReader.propertyReader("config.properties", "serverAddress");
+    /**
+     * we can use @Value annotation to read value from property file
+     * @Value("${serverAddress}") private String serverAdd
+     */
+    String serverAddress = PropertyReader.propertyReader("src//test//resources//application.properties",
+            "serverAddress");
 
     ResponseSpecBuilder builder;
     ResponseSpecification responseSpecification;
@@ -242,7 +246,7 @@ public final class postUsers extends BaseTestExtentReport {
         jsonPath.getString("name");
         log.info(jsonPath.getString("name"));
         AssertHelper.assertEquals(jsonPath.getString("name"), "pallavisawale",
-                "Verifying job profile ");
+                "Verifying name of employee ");
     }
 
     /**
