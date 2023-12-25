@@ -1,6 +1,8 @@
 package com.Automation.APIAutomation.UserManagement;
 
 import com.Automation.APIAutomation.ApiAutomationApplication;
+import com.Automation.APIAutomation.POJO.cityRequest;
+import com.Automation.APIAutomation.POJO.postRequestBody;
 import com.Automation.APIAutomation.automationReport.BaseTestExtentReport;
 import com.Automation.APIAutomation.automationReport.ExtentReport;
 import com.Automation.APIAutomation.enums.StatusCode;
@@ -25,6 +27,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -38,6 +42,7 @@ public final class postUsers extends BaseTestExtentReport {
     private static FileInputStream fileInputStream;
     /**
      * we can use @Value annotation to read value from property file
+     *
      * @Value("${serverAddress}") private String serverAdd
      */
     String serverAddress = PropertyReader.propertyReader("src//test//resources//application.properties",
@@ -278,4 +283,175 @@ public final class postUsers extends BaseTestExtentReport {
         AssertHelper.assertEquals(jsonPath.getString("job"), "SDET",
                 "Verifying job profile ");
     }
+
+    /**
+     * API to validate post request using POJO in body part
+     */
+    @Test
+    public void validatePostWithPOJO() throws IOException {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePostWithPOJO",
+                                "validatePostWithPOJO");
+
+
+        postRequestBody postRequest = new postRequestBody();
+        postRequest.setName("Snehal");
+        postRequest.setJob("QALead");
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(postRequest)
+                .post().then().spec(responseSpec()).extract();
+
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code,
+                "Verifying POST API status code");
+        log.info("validatePostWithPOJO executed successfully");
+        AssertHelper.assertEquals(postRequest.getJob(), "QALead",
+                "Verifying job profile ");
+        AssertHelper.assertEquals(postRequest.getName(), "Snehal",
+                "Verifying name of employee ");
+    }
+
+    /**
+     * API to validate post request using POJO List  in body part
+     */
+    @Test
+    public void validatePostWithPOJOList() throws IOException {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePostWithPOJOList",
+                                "validatePostWithPOJOList");
+
+        List<String> listOfLang = new ArrayList<>();
+        listOfLang.add("JAVA");
+        listOfLang.add("JAVASCRIPT");
+        postRequestBody postRequest = new postRequestBody();
+        postRequest.setName("poonam");
+        postRequest.setJob("SDET");
+        postRequest.setLanguages(listOfLang);
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(postRequest)
+                .post().then().spec(responseSpec()).extract();
+
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code,
+                "Verifying POST API status code");
+        log.info("validatePostWithPOJOList executed successfully");
+        AssertHelper.assertEquals(postRequest.getJob(), "SDET",
+                "Verifying job profile ");
+        AssertHelper.assertEquals(postRequest.getName(), "poonam",
+                "Verifying name of employee ");
+        AssertHelper.assertEquals(postRequest.getLanguages().size(), 2,
+                "Verifying list of languages size");
+    }
+
+    /**
+     * API to validate PUT request using POJO in body part
+     */
+    @Test
+    public void validatePutWithPOJO() throws IOException {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePutWithPOJO",
+                                "validatePutWithPOJO");
+
+        postRequestBody postRequest = new postRequestBody();
+        postRequest.setName("PallaviSawale");
+        postRequest.setJob("Software QA");
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(postRequest)
+                .put("/2").then().spec(responseSpec()).extract();
+
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code,
+                "Verifying PUT API status code");
+        log.info("validatePutWithPOJO executed successfully");
+        AssertHelper.assertEquals(postRequest.getJob(), "Software QA",
+                "Verifying job profile ");
+        AssertHelper.assertEquals(postRequest.getName(), "PallaviSawale",
+                "Verifying name of employee ");
+    }
+
+    /**
+     * API to validate PATCH request using POJO in body part
+     */
+    @Test
+    public void validatePatchWithPOJO() throws IOException {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePatchWithPOJO",
+                                "validatePatchWithPOJO");
+        postRequestBody postRequest = new postRequestBody();
+        postRequest.setName("Kirti");
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(postRequest)
+                .patch("/2").then().spec(responseSpec()).extract();
+
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.SUCCESS.code,
+                "Verifying PATCH API status code");
+        log.info("validatePatchWithPOJO executed successfully");
+        AssertHelper.assertEquals(postRequest.getName(), "Kirti",
+                "Verifying name of employee ");
+    }
+
+    /**
+     * API to validate post request using POJO List  in body part
+     */
+    @Test
+    public void validatePostWithPOJOCityList() throws IOException {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePostWithPOJOList",
+                                "validatePostWithPOJOList");
+
+        cityRequest cityRequest1 = new cityRequest();
+        cityRequest1.setCityName("pune");
+        cityRequest1.setCityTemp("20");
+
+        cityRequest cityRequest2 = new cityRequest();
+        cityRequest2.setCityName("Nashik");
+        cityRequest2.setCityTemp("22");
+
+        List<cityRequest> cityRequestList = new ArrayList<>();
+        cityRequestList.add(cityRequest1);
+        cityRequestList.add(cityRequest2);
+
+        List<String> listOfLang = new ArrayList<>();
+        listOfLang.add("JAVA");
+        listOfLang.add("JAVASCRIPT");
+        postRequestBody postRequest = new postRequestBody();
+        postRequest.setName("poonam");
+        postRequest.setJob("SDET");
+        postRequest.setLanguages(listOfLang);
+        postRequest.setCityRequestList(cityRequestList);
+
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(postRequest)
+                .post().then().spec(responseSpec()).extract();
+
+        AssertHelper.assertEquals(response.getStatusCode(), StatusCode.CREATED.code,
+                "Verifying POST API status code");
+        log.info("validatePostWithPOJOList executed successfully");
+        AssertHelper.assertEquals(postRequest.getJob(), "SDET",
+                "Verifying job profile ");
+        AssertHelper.assertEquals(postRequest.getName(), "poonam",
+                "Verifying name of employee ");
+        AssertHelper.assertEquals(postRequest.getLanguages().size(), 2,
+                "Verifying list of languages size");
+        AssertHelper.assertEquals(postRequest.getCityRequestList().size(), 2,
+                "Verifying list of languages size");
+        log.info(String.valueOf(postRequest.getCityRequestList().get(0).getCityName()));
+        log.info(String.valueOf(postRequest.getCityRequestList().get(1)));
+        AssertHelper.assertEquals(String.valueOf(postRequest.getCityRequestList().get(0).getCityName()), "pune",
+                "Verifying first cityName from cityList");
+        AssertHelper.assertEquals(String.valueOf(postRequest.getCityRequestList().get(0).getCityTemp()), "20",
+                "Verifying first cityTemp from cityList");
+        AssertHelper.assertEquals(String.valueOf(postRequest.getCityRequestList().get(1).getCityName()), "Nashik",
+                "Verifying second cityName from cityList");
+        AssertHelper.assertEquals(String.valueOf(postRequest.getCityRequestList().get(1).getCityTemp()), "22",
+                "Verifying second cityTemp from cityList");
+    }
+
 }
