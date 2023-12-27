@@ -1,6 +1,7 @@
 package com.Automation.APIAutomation.UserManagement;
 
 import com.Automation.APIAutomation.ApiAutomationApplication;
+import com.Automation.APIAutomation.POJO.RootPojo;
 import com.Automation.APIAutomation.POJO.cityRequest;
 import com.Automation.APIAutomation.POJO.postRequestBody;
 import com.Automation.APIAutomation.automationReport.BaseTestExtentReport;
@@ -452,6 +453,54 @@ public final class postUsers extends BaseTestExtentReport {
                 "Verifying second cityName from cityList");
         AssertHelper.assertEquals(String.valueOf(postRequest.getCityRequestList().get(1).getCityTemp()), "22",
                 "Verifying second cityTemp from cityList");
+    }
+
+    /**
+     * Method to verify use of deserialization using POJO
+     */
+    @Test
+    public void validatePatchWithResponsePojoDeserialization() {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePostWithPOJOList",
+                                "validatePostWithPOJOList");
+        String job = "Software developer";
+        postRequestBody patchRequest = new postRequestBody();
+        patchRequest.setJob(job);
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(patchRequest)
+                .patch("/2").then().spec(responseSpec()).extract();
+
+        postRequestBody responseBody = response.as(postRequestBody.class);
+        AssertHelper.assertEquals(responseBody.getJob(), job,"verifying job");
+    }
+
+    /**
+     * Method to verify response body getting from GET request using POJO
+     */
+
+    @Test
+    public void validateGetWithResponsePojoDeserialization() {
+        ExtentReport.extentlog =
+                ExtentReport.extentreport.
+                        startTest("validatePostWithPOJOList",
+                                "validatePostWithPOJOList");
+
+        RootPojo getRequest = new RootPojo();
+        Response response = (Response) given().spec(requestSpec())
+                .header("Content-Type", "application/json")
+                .body(getRequest)
+                .get().then().spec(responseSpec()).extract();
+
+
+
+        RootPojo responseBody = response.as(RootPojo.class);
+        AssertHelper.assertEquals(responseBody.page, 1,"verifying page count");
+//        AssertHelper.assertEquals(responseBody.getData().get(0).email, "george.bluth@reqres.in",
+//                "verifying email");
+        log.info(responseBody.support.getText());
+
     }
 
 }
