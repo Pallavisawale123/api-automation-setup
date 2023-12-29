@@ -2,15 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API Automation  Suite">
     <test name="API Users TestCases">
-    <!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="RegressionSuite"/>-->
-<!--            </run>-->
-<!--        </groups>-->
         <classes>
 <!--            <class name="com.Automation.APIAutomation.ApiAutomationApplicationTests" />-->
-<!--            <class name="com.Automation.APIAutomation.UserManagement.postUsers" />-->
-            <class name="com.Automation.APIAutomation.UserManagement.validateUser"/>
+            <class name="com.Automation.APIAutomation.UserManagement.postUsers" />
+<!--            <class name="com.Automation.APIAutomation.UserManagement.validateUser"/>-->
 
         </classes>
     </test>

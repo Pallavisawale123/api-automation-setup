@@ -25,7 +25,6 @@ class ApiAutomationApplicationTests extends BaseTestExtentReport {
 						startTest("demoTestCase",
 								"Validate first demo test case");
 		AssertHelper.assertEquals(2,2,"values not equals.... ");
-
-	}
+		}
 
 }

@@ -12,7 +12,6 @@ public class TestListeners implements ITestListener, ISuiteListener, IClassListe
     public void onStart(ISuite suite) {
         //code to create csv file
     }
-
     @Override
     public void onFinish(ISuite suite) {
         ISuiteListener.super.onFinish(suite);

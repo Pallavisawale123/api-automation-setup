@@ -7,7 +7,6 @@ import org.testng.asserts.SoftAssert;
  */
 public class SoftAssertionUtil {
     private static SoftAssert softAssertInstance;
-
     private SoftAssertionUtil() {}
 
     public static SoftAssert getInstance() {
