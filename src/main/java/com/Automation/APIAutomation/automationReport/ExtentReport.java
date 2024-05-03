@@ -17,9 +17,7 @@ public class ExtentReport {
         if (extentreport == null) {
 
             extentreport = new ExtentReports(extentConfigXmlpath, true);
-
             extentreport.addSystemInfo("Environment", "QA");
-
             extentreport.loadConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
 
         }

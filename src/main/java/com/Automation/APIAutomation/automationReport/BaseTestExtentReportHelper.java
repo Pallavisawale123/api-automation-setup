@@ -1,11 +1,14 @@
 package com.Automation.APIAutomation.automationReport;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.util.Date;
 
 /**
  * @author psawale
  */
+@Slf4j
 public class BaseTestExtentReportHelper {
     /*
      * create folder
@@ -16,7 +19,7 @@ public class BaseTestExtentReportHelper {
         if (!file.exists()) {
             file.mkdir();//mkdir is used to create folder
         } else
-            System.out.println("Folder already created");
+            log.info("Folder already created");
     }
 
     /*
