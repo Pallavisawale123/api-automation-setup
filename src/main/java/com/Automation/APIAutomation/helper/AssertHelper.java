@@ -55,5 +55,15 @@ public class AssertHelper {
             Assert.fail(errorMsg);
         }
     }
+
+    public static void assertNotNull(Object actual, String message) {
+        try {
+            Assert.assertNotEquals(actual,  message);
+        } catch (AssertionError e) {
+            String errorMsg = String.format("assert assertNotNull failure actual: %s"
+                    , actual);
+            log.error("assert assertNotNull failure: {}", message);
+            Assert.fail(errorMsg);
+        }
 }
 
