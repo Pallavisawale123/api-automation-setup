@@ -4,7 +4,7 @@
     <test name="API Users TestCases">
         <classes>
 <!--            <class name="com.Automation.APIAutomation.ApiAutomationApplicationTests" />-->
-            <class name="com.Automation.APIAutomation.UserManagement.validateUser" />
+            <class name="com.Automation.APIAutomation.UserManagement.postUsers" />
 <!--            <class name="com.Automation.APIAutomation.UserManagement.validateUser"/>-->
 
         </classes>
