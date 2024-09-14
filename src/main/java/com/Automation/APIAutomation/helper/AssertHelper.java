@@ -65,5 +65,5 @@ public class AssertHelper {
             log.error("assert assertNotNull failure: {}", message);
             Assert.fail(errorMsg);
         }
+   }
 }
-
